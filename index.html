@@ -4,60 +4,54 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mike Adkison – Mini Portfolio</title>
-  <meta name="description" content="Mini portfolio site for Mike Adkison – senior front-end-leaning software engineer." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0c10;
-      --panel: #111317;
-      --muted: #8a93a6;
-      --text: #e8ecf1;
-      --accent: #6ec1ff;
-      --accent-2: #9effa5;
-      --border: #1c2230;
-      --chip-bg: #161a22;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --radius-xl: 20px;
-      --radius: 12px;
+    :root { --bg:#0b0c10; --panel:#111317; --muted:#8a93a6; --text:#e8ecf1; --accent:#6ec1ff; --accent-2:#9effa5; --border:#1c2230; --chip-bg:#161a22; --shadow:0 10px 30px rgba(0,0,0,.25); --radius-xl:20px; --radius:12px; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;color:var(--text);background:
+      radial-gradient(1000px 600px at 10% -10%, rgba(51,135,255,.12), transparent 60%),
+      radial-gradient(1000px 600px at 110% 10%, rgba(22,163,74,.10), transparent 60%), var(--bg)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:1350px;margin:0 auto;padding:32px 20px 80px}
+
+    header.hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:40px}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;box-shadow:var(--shadow);max-width:700px}
+    .name{font-size:clamp(32px,4.5vw,48px);font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+    .subtitle{font-size:clamp(15px,2vw,17px);color:var(--muted);margin:0 0 20px}
+    .contact-info{font-size:15px;display:flex;flex-direction:column;gap:6px;align-items:center}
+
+    .section-title{font-size:clamp(30px,6vw,60px);font-weight:800;margin:40px 0 50px;text-align:center;letter-spacing:-.03em;position:relative}
+    .section-title::after{content:"";display:block;width:120px;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px;margin:16px auto 0}
+
+    /* Shared project card styles */
+    .project-row{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start;margin:0}
+    .screenshot img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,.4);cursor:pointer}
+    h3{margin:0 0 8px;font-size:24px}
+    p{margin:0 0 8px;color:var(--muted)}
+    ul.bullets{margin:4px 0 0 18px;padding:0}
+    ul.bullets li{margin:6px 0}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .tag{background:var(--chip-bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:13px;color:var(--muted)}
+
+    /* Grid wrappers: identical behavior */
+    .recnet-grid,.independent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-bottom:48px}
+    .recnet-grid .project-row,.independent-grid .project-row{grid-template-columns:1fr;gap:16px}
+
+    @media (max-width:900px){
+      .recnet-grid,.independent-grid{grid-template-columns:1fr}
+      .project-row{grid-template-columns:1fr;gap:18px}
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: radial-gradient(1000px 600px at 10% -10%, rgba(51,135,255,.12), transparent 60%),
-                  radial-gradient(1000px 600px at 110% 10%, rgba(22,163,74,.10), transparent 60%),
-                  var(--bg);
-      line-height: 1.5;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 1350px; margin: 0 auto; padding: 32px 20px 80px; }
-    header.hero { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
-    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 32px 28px; box-shadow: var(--shadow); max-width: 700px; }
-    .name { font-size: clamp(32px, 4.5vw, 48px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
-    .subtitle { font-size: clamp(15px, 2vw, 17px); color: var(--muted); margin: 0 0 20px; }
-    .contact-info { font-size: 15px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
-    .section-title { font-size: clamp(30px, 6vw, 60px); font-weight: 800; margin: 40px 0 50px; text-align: center; letter-spacing: -0.03em; color: var(--text); position: relative; }
-    .section-title::after { content: ""; display: block; width: 120px; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 4px; margin: 16px auto 0; }
-    .project-row { display:grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; margin-bottom: 48px; }
-    .screenshot img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-    h3 { margin: 0 0 8px 0; font-size: 24px; }
-    p { margin: 0 0 8px 0; }
-    ul.bullets { margin: 4px 0 0 18px; padding: 0; }
-    ul.bullets li { margin: 6px 0; }
-    .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .tag { background: var(--chip-bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 13px; color: var(--muted); }
-    @media (max-width: 900px) { .project-row { grid-template-columns: 1fr; gap: 18px; } .screenshot img { max-width: 100%; } }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="hero" role="banner">
-      <div class="hero-card" data-animate>
+      <div class="hero-card">
         <h1 class="name">Mike Adkison</h1>
         <p class="subtitle">Selected projects – fast, intuitive, data-driven web tools.</p>
         <div class="contact-info">
@@ -68,19 +62,20 @@
     </header>
 
     <main id="main" role="main">
-      <section class="card" data-animate>
-        <div class="section-title">Projects</div>
+      <div class="section-title">Projects</div>
 
-        <h2 style="text-align:center;margin-bottom:8px;">Rec.net Platform</h2>
-        <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a leading social gaming company.</p>
+      <h2 style="text-align:center;margin-bottom:8px;">Rec.net Platform</h2>
+      <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a leading social gaming company.</p>
 
+      <div class="recnet-grid">
+        <!-- Rec.net Main Site -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="recnet_main.png" alt="Rec.net main site screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Rec.net Main Site</h3>
-            <p style="color:var(--muted);">Primary web platform for Rec Room, serving millions of monthly visitors with features including analytics, social tools, account management, news, and commerce.</p>
+            <p>Primary web platform for Rec Room, serving millions of monthly visitors with features including analytics, social tools, account management, news, and commerce.</p>
             <ul class="bullets">
               <li>Implemented and maintained user-facing systems across the entire platform.</li>
               <li>Led architectural modernization efforts, including framework upgrades and performance optimizations.</li>
@@ -92,13 +87,14 @@
           </div>
         </article>
 
+        <!-- Creator Analytics Dashboard -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="creator_dashboard_0.png" alt="Creator analytics dashboard screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Creator Analytics Dashboard</h3>
-            <p style="color:var(--muted);">Developed professionally at Rec Room — interactive web tooling for creators to visualize performance and revenue metrics, integrated with ASP.NET Core APIs and Cosmos DB.</p>
+            <p>Interactive web tooling for creators to visualize performance and revenue metrics, integrated with ASP.NET Core APIs and Cosmos DB.</p>
             <ul class="bullets">
               <li>80%+ D30 retention among users of the dashboard.</li>
               <li>Built with React, TypeScript; data from ASP.NET Core APIs and Cosmos DB.</li>
@@ -110,15 +106,15 @@
           </div>
         </article>
 
+        <!-- Design System & Site Overhaul -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="creator_dashboard_1.png" alt="Design system screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Design System & Site Overhaul</h3>
-            <p style="color:var(--muted);">Professional project for Rec Room: rebuilt navigation and component system in partnership with Design.</p>
+            <p>Rebuilt navigation and component system in partnership with Design to improve consistency, accessibility, and iteration speed.</p>
             <ul class="bullets">
-              <li>Improved consistency, accessibility, and iteration speed across web surfaces.</li>
               <li>Standardized components and tokens; reduced UI drift and maintenance costs.</li>
               <li>Enabled faster feature delivery and a complete visual refresh.</li>
             </ul>
@@ -128,13 +124,14 @@
           </div>
         </article>
 
+        <!-- Online Shop -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="shop.png" alt="Online shop screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Online Shop</h3>
-            <p style="color:var(--muted);">Built professionally for Rec Room: a web storefront for purchasing digital goods, developed in collaboration with backend and finance teams.</p>
+            <p>Web storefront for purchasing digital goods, developed in collaboration with backend and finance teams.</p>
             <ul class="bullets">
               <li>Implemented frontend flows for product browse, cart, and checkout; integrated with a merchant-of-record provider and backend webhooks.</li>
               <li>Coordinated requirements across product, design, backend, and finance to ensure tax/liability handling and reliable fulfillment.</li>
@@ -146,16 +143,21 @@
             </div>
           </div>
         </article>
+      </div>
 
-        <h2 style="text-align:center;margin:60px 0 32px;">Independent Work</h2>
+      <!-- Independent Work mirrors the Rec.net grid structure -->
+      <h2 style="text-align:center;margin:60px 0 8px;">Independent Work</h2>
+      <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Personal projects and experiments outside of full-time roles.</p>
 
+      <div class="independent-grid">
+        <!-- 3D Indie Game -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="game.png" alt="3D indie game screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>3D Indie Game (in development)</h3>
-            <p style="color:var(--muted);">Single-player game built in Godot with a collaborator; focus on gameplay systems and UI.</p>
+            <p>Single-player game built in Godot with a collaborator; focus on gameplay systems and UI.</p>
             <ul class="bullets">
               <li>Implemented core gameplay loops, UI, and tooling inside the engine.</li>
               <li>Experience with GDScript, scene composition, animation/physics basics.</li>
@@ -166,7 +168,7 @@
             </div>
           </div>
         </article>
-      </section>
+      </div>
     </main>
   </div>
 </body>
