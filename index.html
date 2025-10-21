@@ -31,9 +31,9 @@
       line-height:1.5;
       color:var(--text);
       background:
-      radial-gradient(1400px 900px at 20% 0%, rgba(90,160,255,0.25), transparent 80%),
-      radial-gradient(1400px 900px at 80% 100%, rgba(40,120,255,0.15), transparent 80%),
-      linear-gradient(180deg, #0b0c10 0%, #0d1118 50%, #0b0f18 100%);
+        radial-gradient(1400px 900px at 20% 0%, rgba(90,160,255,0.25), transparent 80%),
+        radial-gradient(1400px 900px at 80% 100%, rgba(40,120,255,0.15), transparent 80%),
+        linear-gradient(180deg, #0b0c10 0%, #0d1118 50%, #0b0f18 100%);
       background-attachment: fixed;
       background-repeat: no-repeat;
       background-size: cover;
@@ -49,11 +49,13 @@
     .tagline{font-size:clamp(17px,2.5vw,20px);color:var(--text);font-weight:500;margin:0 0 12px}
     .contact-info{font-size:15px;display:flex;flex-direction:column;gap:4px;align-items:center}
 
-    .section-title{font-size:clamp(30px,6vw,60px);font-weight:800;margin:32px 0 40px;text-align:center;letter-spacing:-.03em;position:relative;
+    .section-title{
+      font-size:clamp(30px,6vw,60px);
+      font-weight:800;margin:32px 0 40px;text-align:center;letter-spacing:-.03em;position:relative;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-}
+    }
     .section-title::after{content:"";display:block;width:120px;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px;margin:14px auto 0}
 
     .project-row{display:flex;flex-direction:column;gap:24px;align-items:start;margin:0}
@@ -64,9 +66,9 @@
     .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .tag{background:var(--chip-bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:13px;color:var(--muted)}
 
-    /* === Fix: consistent gap below each image === */
+    /* === Image styling & spacing === */
     .screenshot img{
-      display:block;              /* remove baseline whitespace */
+      display:block;
       width:100%;
       aspect-ratio:16/9;
       object-fit:cover;
@@ -75,13 +77,13 @@
       box-shadow:0 10px 40px rgba(0,0,0,.4);
       cursor:pointer;
     }
-    .screenshot{margin-bottom:var(--img-title-gap);} /* fixed 24px (or 16px) gap under image */
+    .screenshot{margin-bottom:var(--img-title-gap);}
     .recnet-grid .project-row,
     .independent-grid .project-row{
       grid-template-columns:1fr;
-      gap:0; /* no double gaps between image and text */
+      gap:0;
     }
-    .project-details > *:first-child{margin-top:0;} /* avoid stray top margins */
+    .project-details > *:first-child{margin-top:0;}
 
     .recnet-grid,.independent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-bottom:48px}
 
@@ -90,10 +92,47 @@
       .project-row{grid-template-columns:1fr}
     }
 
+    /* === Modal === */
     .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;padding:60px 20px;background:rgba(0,0,0,.85)}
     .modal-content{display:block;max-width:100%;max-height:85vh;margin:0 auto;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.6)}
     .close{position:absolute;top:16px;right:24px;color:#fff;font-size:36px;font-weight:800;cursor:pointer}
     .close:hover{color:var(--accent)}
+
+    /* === Creator gallery arrows === */
+    .gallery { position: relative; }
+    .gallery .screenshot { margin-bottom: var(--img-title-gap); }
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 42px; width: 42px;
+      display: grid; place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10,12,16,0.55);
+      backdrop-filter: blur(6px);
+      color: var(--text);
+      font-size: 24px; line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      z-index: 2;
+    }
+    .gallery-btn:hover {
+      transform: translateY(-50%) scale(1.06);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+      background: rgba(20,25,35,0.65);
+      border-color: rgba(110,193,255,0.35);
+    }
+    .gallery-btn:active { transform: translateY(-50%) scale(0.98); }
+    .gallery-btn.prev { left: 10px; }
+    .gallery-btn.next { right: 10px; }
+
+    /* Keyboard focus ring */
+    .gallery:focus-within .gallery-btn {
+      border-color: rgba(110,193,255,0.55);
+      box-shadow: 0 0 0 3px rgba(110,193,255,0.18);
+    }
   </style>
 </head>
 <body>
@@ -130,9 +169,16 @@
           </div>
         </article>
 
+        <!-- Creator analytics dashboard with gallery -->
         <article class="project-row">
           <div class="project-media">
-            <div class="screenshot"><img src="creator_dashboard_0.png" alt="Creator analytics dashboard screenshot"></div>
+            <div class="gallery" id="creator-gallery" tabindex="0" aria-label="Creator analytics gallery">
+              <button class="gallery-btn prev" aria-label="Previous screenshot" type="button">‹</button>
+              <div class="screenshot">
+                <img id="creator-gallery-img" src="creator_dashboard_0.png" alt="Creator analytics dashboard screenshot 1 of 3">
+              </div>
+              <button class="gallery-btn next" aria-label="Next screenshot" type="button">›</button>
+            </div>
           </div>
           <div class="project-details card">
             <h3>Creator analytics dashboard</h3>
@@ -204,19 +250,60 @@
   </div>
 
   <script>
-    const modal=document.getElementById('imgModal');
-    const modalImg=document.getElementById('modalImg');
-    const closeBtn=document.querySelector('.close');
+    // --- Existing modal open/close for .screenshot img ---
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.querySelector('.close');
+
     document.querySelectorAll('.screenshot img').forEach(img=>{
       img.addEventListener('click',()=>{
         modal.style.display='block';
         modalImg.src=img.src;
       });
     });
-    function closeModal(){modal.style.display='none';modalImg.src='';}
+    function closeModal(){ modal.style.display='none'; modalImg.src=''; }
     closeBtn.addEventListener('click',closeModal);
-    modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+    modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+    // --- Creator gallery logic ---
+    (function() {
+      const frames = [
+        'creator_dashboard_0.png',
+        'creator_dashboard_1.png',
+        'creator_dashboard_2.png'
+      ];
+
+      // Preload to reduce flicker
+      frames.forEach(src => { const im = new Image(); im.src = src; });
+
+      let idx = 0;
+      const imgEl = document.getElementById('creator-gallery-img');
+      const gallery = document.getElementById('creator-gallery');
+      if (!imgEl || !gallery) return;
+
+      const prevBtn = gallery.querySelector('.gallery-btn.prev');
+      const nextBtn = gallery.querySelector('.gallery-btn.next');
+
+      function setImage(i) {
+        idx = (i + frames.length) % frames.length;
+        imgEl.src = frames[idx];
+        imgEl.alt = `Creator analytics dashboard screenshot ${idx + 1} of ${frames.length}`;
+      }
+
+      function next() { setImage(idx + 1); }
+      function prev() { setImage(idx - 1); }
+
+      // Buttons: prevent the modal from opening when arrows are clicked
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+
+      // Keyboard support when the gallery has focus
+      gallery.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { prev(); }
+        if (e.key === 'ArrowRight') { next(); }
+      });
+    })();
   </script>
 </body>
 </html>
