@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mike Adkison – Mini Portfolio</title>
+<meta name="description" content="Mini portfolio site for Mike Adkison – senior front‑end‑leaning software engineer." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #0b0c10;
+--panel: #111317;
+--muted: #8a93a6;
+--text: #e8ecf1;
+--accent: #6ec1ff;
+--accent-2: #9effa5;
+--border: #1c2230;
+--chip-bg: #161a22;
+--shadow: 0 10px 30px rgba(0,0,0,.25);
+--radius-xl: 20px;
+--radius: 12px;
+}
+@media (prefers-color-scheme: light) {
+:root {
+--bg: #f8fafc;
+--panel: #ffffff;
+--muted: #56627a;
+--text: #0f172a;
+--accent: #0ea5e9;
+--accent-2: #16a34a;
+--border: #e5e7eb;
+--chip-bg: #f1f5f9;
+}
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+margin: 0;
+font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+color: var(--text);
+background: radial-gradient(1000px 600px at 10% -10%, rgba(51,135,255,.12), transparent 60%),
+radial-gradient(1000px 600px at 110% 10%, rgba(22,163,74,.10), transparent 60%),
+var(--bg);
+line-height: 1.5;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container {
+max-width: 1050px;
+margin: 0 auto;
+padding: 32px 20px 80px;
+}
+.skip-link {
+position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+}
+.skip-link:focus { left: 16px; top: 16px; width: auto; height: auto; background: var(--panel); color: var(--text); padding: 8px 12px; border-radius: 8px; box-shadow: var(--shadow); }
+
+
+header.hero {
+display: grid; gap: 16px;
+grid-template-columns: 1fr; align-items: center;
+margin-bottom: 28px;
+}
+.hero-card {
+background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+border: 1px solid var(--border);
+border-radius: var(--radius-xl);
+padding: 28px;
+box-shadow: var(--shadow);
+}
+.name { font-size: clamp(28px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 4px; }
+.subtitle { font-size: clamp(14px, 2vw, 16px); color: var(--muted); margin: 0 0 16px; }
+
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip { background: var(--chip-bg); border: 1px solid var(--border); color: var(--muted); padding: 6px 10px; border-radius: 999px; font-size: 12px; }
+
+
+.grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 800px) { .grid { grid-template-columns: 1.25fr 1fr; } }
+
+
+section { margin-top: 26px; }
+.section-title { font-size: 14px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 2px 0 14px; }
+
+
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+
+
+.role { display:flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.role h3 { margin: 0; font-size: 18px; }
+.role .meta { color: var(--muted); font-size: 13px; }
+ul.bullets { margin: 10px 0 0 18px; padding: 0; }
+ul.bullets li { margin: 8px 0; }
+
+
+.tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tag { background: var(--chip-bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; color: var(--muted); }
+
+
+.projects { display:grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .projects { grid-template-columns: 1fr 1fr; } }
+
+
+figure.project { margin: 0; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display:flex; flex-direction: column; }
+.screenshot {
+position: relative; aspect-ratio: 16/9; background: repeating-linear-gradient(45deg, #0e1420, #0e1420 10px, #0f172a 10px, #0f172a 20px);
+display:grid; place-items:center; color: var(--muted);
+}
+.screenshot .placeholder-label {
+font-size: 14px; opacity: .9; background: rgba(0,0,0,.35); padding: 6px 10px; border: 1px dashed var(--muted); border-radius: 8px;
+}
+figcaption { padding: 14px 14px 16px; }
+figcaption h4 { margin: 0 0 6px; font-size: 16px; }
+</html>
