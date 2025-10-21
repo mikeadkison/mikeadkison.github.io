@@ -19,26 +19,23 @@
 
     .container{max-width:1350px;margin:0 auto;padding:32px 20px 80px}
 
-    header.hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:40px}
-    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;box-shadow:var(--shadow);max-width:700px}
-    .name{font-size:clamp(32px,4.5vw,48px);font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
-    .subtitle{font-size:clamp(15px,2vw,17px);color:var(--muted);margin:0 0 20px}
-    .contact-info{font-size:15px;display:flex;flex-direction:column;gap:6px;align-items:center}
+    header.hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:36px}
+    .name{font-size:clamp(32px,4.5vw,48px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+    .tagline{font-size:clamp(17px,2.5vw,20px);color:var(--text);font-weight:500;margin:0 0 12px}
+    .contact-info{font-size:15px;display:flex;flex-direction:column;gap:4px;align-items:center}
 
-    .section-title{font-size:clamp(30px,6vw,60px);font-weight:800;margin:40px 0 50px;text-align:center;letter-spacing:-.03em;position:relative}
-    .section-title::after{content:"";display:block;width:120px;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px;margin:16px auto 0}
+    .section-title{font-size:clamp(30px,6vw,60px);font-weight:800;margin:32px 0 40px;text-align:center;letter-spacing:-.03em;position:relative}
+    .section-title::after{content:"";display:block;width:120px;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px;margin:14px auto 0}
 
-    /* Shared project card styles */
     .project-row{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start;margin:0}
-    .screenshot img{width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,.4);cursor:pointer}
+    .screenshot img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,.4);cursor:pointer}
     h3{margin:0 0 8px;font-size:24px}
-    p{margin:0 0 8px;color:var(--muted)}
-    ul.bullets{margin:4px 0 0 18px;padding:0}
+    p{margin:0 0 8px;color:var(--muted);font-size:16px}
+    ul.bullets{margin:4px 0 0 18px;padding:0;font-size:16px}
     ul.bullets li{margin:6px 0}
     .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .tag{background:var(--chip-bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:13px;color:var(--muted)}
 
-    /* Grid wrappers: identical behavior */
     .recnet-grid,.independent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-bottom:48px}
     .recnet-grid .project-row,.independent-grid .project-row{grid-template-columns:1fr;gap:16px}
 
@@ -46,18 +43,21 @@
       .recnet-grid,.independent-grid{grid-template-columns:1fr}
       .project-row{grid-template-columns:1fr;gap:18px}
     }
+
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;padding:60px 20px;background:rgba(0,0,0,.85)}
+    .modal-content{display:block;max-width:100%;max-height:85vh;margin:0 auto;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.6)}
+    .close{position:absolute;top:16px;right:24px;color:#fff;font-size:36px;font-weight:800;cursor:pointer}
+    .close:hover{color:var(--accent)}
   </style>
 </head>
 <body>
   <div class="container">
     <header class="hero" role="banner">
-      <div class="hero-card">
-        <h1 class="name">Mike Adkison</h1>
-        <p class="subtitle">Selected projects – fast, intuitive, data-driven web tools.</p>
-        <div class="contact-info">
-          <a href="mailto:mikeadkison@gmail.com">mikeadkison@gmail.com</a>
-          <a href="https://www.linkedin.com/in/mike-adkison-93435984/" target="_blank">linkedin.com/in/mike-adkison</a>
-        </div>
+      <h1 class="name">Mike Adkison</h1>
+      <p class="tagline">Front-end-leaning Software Engineer crafting fast, thoughtful, and reliable web experiences.</p>
+      <div class="contact-info">
+        <a href="mailto:mikeadkison@gmail.com">mikeadkison@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mike-adkison-93435984/" target="_blank">linkedin.com/in/mike-adkison</a>
       </div>
     </header>
 
@@ -68,10 +68,9 @@
       <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a leading social gaming company.</p>
 
       <div class="recnet-grid">
-        <!-- Rec.net Main Site -->
         <article class="project-row">
           <div class="project-media">
-            <div class="screenshot"><img src="main_site_screenshot.png" alt="Rec.net main site screenshot"></div>
+            <div class="screenshot"><img src="recnet_main.png" alt="Rec.net main site screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Rec.net Main Site</h3>
@@ -81,13 +80,9 @@
               <li>Led architectural modernization efforts, including framework upgrades and performance optimizations.</li>
               <li>Partnered cross-functionally with design, backend, and product to deliver scalable, reliable web experiences.</li>
             </ul>
-            <div class="tags">
-              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Azure</span><span class="tag">ASP.NET Core</span>
-            </div>
           </div>
         </article>
 
-        <!-- Creator Analytics Dashboard -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="creator_dashboard_0.png" alt="Creator analytics dashboard screenshot"></div>
@@ -100,16 +95,12 @@
               <li>Built with React, TypeScript; data from ASP.NET Core APIs and Cosmos DB.</li>
               <li>Shipped iteratively using A/B tests (Statsig) and user feedback.</li>
             </ul>
-            <div class="tags">
-              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">ASP.NET Core</span><span class="tag">Cosmos DB</span>
-            </div>
           </div>
         </article>
 
-        <!-- Design System & Site Overhaul -->
         <article class="project-row">
           <div class="project-media">
-            <div class="screenshot"><img src="design_system.png" alt="Design system screenshot"></div>
+            <div class="screenshot"><img src="creator_dashboard_1.png" alt="Design system screenshot"></div>
           </div>
           <div class="project-details card">
             <h3>Design System & Site Overhaul</h3>
@@ -118,13 +109,9 @@
               <li>Standardized components and tokens; reduced UI drift and maintenance costs.</li>
               <li>Enabled faster feature delivery and a complete visual refresh.</li>
             </ul>
-            <div class="tags">
-              <span class="tag">Design System</span><span class="tag">Accessibility</span><span class="tag">Component Library</span>
-            </div>
           </div>
         </article>
 
-        <!-- Online Shop -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="shop.png" alt="Online shop screenshot"></div>
@@ -138,19 +125,14 @@
               <li>Instrumented analytics and experimented on conversion with A/B tests.</li>
               <li>Responsible for 10% of company revenue through shop sales.</li>
             </ul>
-            <div class="tags">
-              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Checkout</span><span class="tag">A/B testing</span>
-            </div>
           </div>
         </article>
       </div>
 
-      <!-- Independent Work mirrors the Rec.net grid structure -->
       <h2 style="text-align:center;margin:60px 0 8px;">Independent Work</h2>
       <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Personal projects and experiments outside of full-time roles.</p>
 
       <div class="independent-grid">
-        <!-- 3D Indie Game -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="game.png" alt="3D indie game screenshot"></div>
@@ -163,13 +145,26 @@
               <li>Experience with GDScript, scene composition, animation/physics basics.</li>
               <li>Targeting Steam release; building playtestable vertical slices.</li>
             </ul>
-            <div class="tags">
-              <span class="tag">Godot</span><span class="tag">GDScript</span><span class="tag">Game UI</span>
-            </div>
           </div>
         </article>
       </div>
     </main>
   </div>
+
+  <div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-label="Image preview">
+    <span class="close" aria-label="Close">&times;</span>
+    <img class="modal-content" id="modalImg" alt="Expanded project screenshot">
+  </div>
+
+  <script>
+    const modal=document.getElementById('imgModal');
+    const modalImg=document.getElementById('modalImg');
+    const closeBtn=document.querySelector('.close');
+    document.querySelectorAll('.screenshot img').forEach(img=>{img.addEventListener('click',()=>{modal.style.display='block';modalImg.src=img.src;});});
+    function closeModal(){modal.style.display='none';modalImg.src='';}
+    closeBtn.addEventListener('click',closeModal);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  </script>
 </body>
 </html>
