@@ -20,7 +20,7 @@
       --shadow:0 10px 30px rgba(0,0,0,.25);
       --radius-xl:20px;
       --radius:12px;
-      --img-title-gap:24px; /* change to 16px if you want tighter spacing */
+      --img-title-gap:24px;
     }
 
     *{box-sizing:border-box}
@@ -47,7 +47,28 @@
     header.hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:36px}
     .name{font-size:clamp(32px,4.5vw,48px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
     .tagline{font-size:clamp(17px,2.5vw,20px);color:var(--text);font-weight:500;margin:0 0 12px}
-    .contact-info{font-size:15px;display:flex;flex-direction:column;gap:4px;align-items:center}
+
+    /* Modern horizontal contact line */
+    .contact-info {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      font-size:15px;
+      color:var(--muted);
+    }
+    .contact-info a {
+      color:var(--accent);
+      transition:opacity .2s ease;
+    }
+    .contact-info a:hover {
+      opacity:.85;
+    }
+    .divider {
+      color:var(--muted);
+      opacity:.4;
+    }
 
     .section-title{
       font-size:clamp(30px,6vw,60px);
@@ -66,7 +87,6 @@
     .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .tag{background:var(--chip-bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:13px;color:var(--muted)}
 
-    /* === Image styling & spacing === */
     .screenshot img{
       display:block;
       width:100%;
@@ -92,13 +112,11 @@
       .project-row{grid-template-columns:1fr}
     }
 
-    /* === Modal === */
     .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;padding:60px 20px;background:rgba(0,0,0,.85)}
     .modal-content{display:block;max-width:100%;max-height:85vh;margin:0 auto;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,.6)}
     .close{position:absolute;top:16px;right:24px;color:#fff;font-size:36px;font-weight:800;cursor:pointer}
     .close:hover{color:var(--accent)}
 
-    /* === Creator gallery arrows === */
     .gallery { position: relative; }
     .gallery .screenshot { margin-bottom: var(--img-title-gap); }
     .gallery-btn {
@@ -128,7 +146,6 @@
     .gallery-btn.prev { left: 10px; }
     .gallery-btn.next { right: 10px; }
 
-    /* Keyboard focus ring */
     .gallery:focus-within .gallery-btn {
       border-color: rgba(110,193,255,0.55);
       box-shadow: 0 0 0 3px rgba(110,193,255,0.18);
@@ -142,12 +159,16 @@
       <p class="tagline">Front-end-leaning software engineer crafting fast, thoughtful, and reliable web experiences.</p>
       <div class="contact-info">
         <a href="mailto:mikeadkison@gmail.com">mikeadkison@gmail.com</a>
+        <span class="divider">•</span>
         <a href="https://www.linkedin.com/in/mike-adkison-93435984/" target="_blank">linkedin.com/in/mike-adkison</a>
+        <span class="divider">•</span>
+        <a href="/resume.pdf" target="_blank">Resume</a>
+        <span class="divider">•</span>
+        <span>Seattle, WA / Remote</span>
       </div>
     </header>
 
     <main id="main" role="main">
-
       <h2 style="text-align:center;margin-bottom:8px;">Professional projects: Rec.net platform</h2>
       <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">
         Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a social gaming company.
@@ -169,7 +190,6 @@
           </div>
         </article>
 
-        <!-- Creator analytics dashboard with gallery -->
         <article class="project-row">
           <div class="project-media">
             <div class="gallery" id="creator-gallery" tabindex="0" aria-label="Creator analytics gallery">
@@ -250,7 +270,6 @@
   </div>
 
   <script>
-    // --- Existing modal open/close for .screenshot img ---
     const modal = document.getElementById('imgModal');
     const modalImg = document.getElementById('modalImg');
     const closeBtn = document.querySelector('.close');
@@ -266,15 +285,12 @@
     modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
     document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-    // --- Creator gallery logic ---
     (function() {
       const frames = [
         'creator_dashboard_0.png',
         'creator_dashboard_1.png',
         'creator_dashboard_2.png'
       ];
-
-      // Preload to reduce flicker
       frames.forEach(src => { const im = new Image(); im.src = src; });
 
       let idx = 0;
@@ -294,11 +310,9 @@
       function next() { setImage(idx + 1); }
       function prev() { setImage(idx - 1); }
 
-      // Buttons: prevent the modal from opening when arrows are clicked
       prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
       nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
 
-      // Keyboard support when the gallery has focus
       gallery.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') { prev(); }
         if (e.key === 'ArrowRight') { next(); }
