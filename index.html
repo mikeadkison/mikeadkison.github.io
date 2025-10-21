@@ -87,14 +87,9 @@
       margin: 16px auto 0;
     }
 
-    /* Project layout */
     .project-row { display:grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: stretch; margin-bottom: 18px; }
     .project-row:last-of-type { margin-bottom: 6px; }
-
-    /* Screenshot placeholder */
-    .screenshot { aspect-ratio: 16 / 9; background: repeating-linear-gradient(45deg, #0e1420, #0e1420 10px, #0f172a 10px, #0f172a 20px); display:grid; place-items:center; color: var(--muted); }
-    .placeholder-label { font-size: 14px; opacity: .9; background: rgba(0,0,0,.35); padding: 6px 10px; border: 1px dashed var(--muted); border-radius: 8px; }
-
+    .screenshot img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
     h3 { margin: 0 0 6px 0; font-size: 22px; }
     p { margin: 0 0 8px 0; }
     ul.bullets { margin: 4px 0 0 18px; padding: 0; }
@@ -102,14 +97,10 @@
     .tags { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .tag { background: var(--chip-bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; color: var(--muted); }
 
-    /* Mobile: stack image above text */
     @media (max-width: 900px) {
       .project-row { grid-template-columns: 1fr; gap: 12px; }
       .project-details { padding: 14px; }
     }
-
-    [data-animate] { opacity: 0; transform: translateY(8px); animation: fadeUp .6s ease forwards; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -125,18 +116,38 @@
       <section class="card" data-animate>
         <div class="section-title">Projects</div>
 
-        <!-- Creator Analytics Dashboard -->
+        <h2 style="text-align:center;margin-bottom:8px;">Rec.net Platform</h2>
+        <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a leading social gaming company.</p>
+
+        <!-- Rec.net Main Site -->
         <article class="project-row">
-          <div class="project-media" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);">
-            <div class="screenshot" aria-label="Analytics dashboard placeholder">
-              <div class="placeholder-label">Add analytics dashboard screenshot here (16:9)</div>
+          <div class="project-media">
+            <div class="screenshot"><img src="recnet_main.png" alt="Rec.net main site screenshot"></div>
+          </div>
+          <div class="project-details card">
+            <h3>Rec.net Main Site</h3>
+            <p style="color:var(--muted);">Primary web platform for Rec Room, serving millions of monthly visitors with features including analytics, social tools, account management, news, and commerce.</p>
+            <ul class="bullets">
+              <li>Implemented and maintained user-facing systems across the entire platform.</li>
+              <li>Led architectural modernization efforts, including framework upgrades and performance optimizations.</li>
+              <li>Partnered cross-functionally with design, backend, and product to deliver scalable, reliable web experiences.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Azure</span><span class="tag">ASP.NET Core</span>
             </div>
           </div>
-          <div class="project-details card" style="display:flex;flex-direction:column;justify-content:center;">
+        </article>
+
+        <!-- Creator Analytics Dashboard -->
+        <article class="project-row">
+          <div class="project-media">
+            <div class="screenshot"><img src="creator_dashboard_0.png" alt="Creator analytics dashboard screenshot"></div>
+          </div>
+          <div class="project-details card">
             <h3>Creator Analytics Dashboard</h3>
-            <p style="color:var(--muted);">Interactive web tooling for creators to visualize performance and revenue metrics. Role: front-end owner; integrated with existing ASP.NET Core APIs and Cosmos DB.</p>
+            <p style="color:var(--muted);">Developed professionally at Rec Room — interactive web tooling for creators to visualize performance and revenue metrics, integrated with ASP.NET Core APIs and Cosmos DB.</p>
             <ul class="bullets">
-              <li>80%+ D30 retention among active creators.</li>
+              <li>80%+ D30 retention among users of the dashboard.</li>
               <li>Built with React, TypeScript; data from ASP.NET Core APIs and Cosmos DB.</li>
               <li>Shipped iteratively using A/B tests (Statsig) and user feedback.</li>
             </ul>
@@ -148,14 +159,12 @@
 
         <!-- Design System & Site Overhaul -->
         <article class="project-row">
-          <div class="project-media" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);">
-            <div class="screenshot" aria-label="Design system placeholder">
-              <div class="placeholder-label">Add design system / site redesign screenshot here (16:9)</div>
-            </div>
+          <div class="project-media">
+            <div class="screenshot"><img src="creator_dashboard_1.png" alt="Design system screenshot"></div>
           </div>
-          <div class="project-details card" style="display:flex;flex-direction:column;justify-content:center;">
+          <div class="project-details card">
             <h3>Design System & Site Overhaul</h3>
-            <p style="color:var(--muted);">Rebuilt navigation and component system in partnership with Design.</p>
+            <p style="color:var(--muted);">Professional project for Rec Room: rebuilt navigation and component system in partnership with Design.</p>
             <ul class="bullets">
               <li>Improved consistency, accessibility, and iteration speed across web surfaces.</li>
               <li>Standardized components and tokens; reduced UI drift and maintenance costs.</li>
@@ -169,18 +178,17 @@
 
         <!-- Online Shop -->
         <article class="project-row">
-          <div class="project-media" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);">
-            <div class="screenshot" aria-label="Online shop placeholder">
-              <div class="placeholder-label">Add online shop / checkout UI screenshot here (16:9)</div>
-            </div>
+          <div class="project-media">
+            <div class="screenshot"><img src="shop.png" alt="Online shop screenshot"></div>
           </div>
-          <div class="project-details card" style="display:flex;flex-direction:column;justify-content:center;">
+          <div class="project-details card">
             <h3>Online Shop</h3>
-            <p style="color:var(--muted);">Web storefront for purchasing digital goods, built in collaboration with backend and finance.</p>
+            <p style="color:var(--muted);">Built professionally for Rec Room: a web storefront for purchasing digital goods, developed in collaboration with backend and finance teams.</p>
             <ul class="bullets">
               <li>Implemented frontend flows for product browse, cart, and checkout; integrated with a merchant-of-record provider and backend webhooks.</li>
               <li>Coordinated requirements across product, design, backend, and finance to ensure tax/liability handling and reliable fulfillment.</li>
               <li>Instrumented analytics and experimented on conversion with A/B tests.</li>
+              <li>Responsible for 10% of company revenue through shop sales.</li>
             </ul>
             <div class="tags">
               <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Checkout</span><span class="tag">A/B testing</span>
@@ -188,14 +196,14 @@
           </div>
         </article>
 
+        <h2 style="text-align:center;margin:60px 0 32px;">Independent Work</h2>
+
         <!-- 3D Indie Game -->
         <article class="project-row">
-          <div class="project-media" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);">
-            <div class="screenshot" aria-label="3D indie game placeholder">
-              <div class="placeholder-label">Add 3D indie game screenshot here (16:9)</div>
-            </div>
+          <div class="project-media">
+            <div class="screenshot"><img src="game.png" alt="3D indie game screenshot"></div>
           </div>
-          <div class="project-details card" style="display:flex;flex-direction:column;justify-content:center;">
+          <div class="project-details card">
             <h3>3D Indie Game (in development)</h3>
             <p style="color:var(--muted);">Single-player game built in Godot with a collaborator; focus on gameplay systems and UI.</p>
             <ul class="bullets">
