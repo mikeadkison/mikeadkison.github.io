@@ -117,6 +117,7 @@
     .close{position:absolute;top:16px;right:24px;color:#fff;font-size:36px;font-weight:800;cursor:pointer}
     .close:hover{color:var(--accent)}
 
+    /* === Gallery controls (used by both galleries) === */
     .gallery { position: relative; }
     .gallery .screenshot { margin-bottom: var(--img-title-gap); }
     .gallery-btn {
@@ -169,12 +170,14 @@
     </header>
 
     <main id="main" role="main">
+
       <h2 style="text-align:center;margin-bottom:8px;">Professional projects: Rec.net platform</h2>
       <p style="text-align:center;margin:0 0 32px;color:var(--muted);font-size:15px;">
         Professional work completed as a full-time software engineer at <strong>Rec Room</strong>, a social gaming company.
       </p>
 
       <div class="recnet-grid">
+        <!-- Rec.net main site -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="main_site_screenshot.png" alt="Rec.net main site screenshot"></div>
@@ -190,6 +193,7 @@
           </div>
         </article>
 
+        <!-- Creator analytics dashboard with gallery -->
         <article class="project-row">
           <div class="project-media">
             <div class="gallery" id="creator-gallery" tabindex="0" aria-label="Creator analytics gallery">
@@ -211,9 +215,17 @@
           </div>
         </article>
 
+        <!-- Design system & site overhaul — now with gallery -->
         <article class="project-row">
           <div class="project-media">
-            <div class="screenshot"><img src="design_system.png" alt="Design system screenshot"></div>
+            <div class="gallery" id="design-gallery" tabindex="0" aria-label="Design system gallery">
+              <button class="gallery-btn prev" aria-label="Previous screenshot" type="button">‹</button>
+              <div class="screenshot">
+                <!-- First image remains the same filename; additional images are _1 and _2 -->
+                <img id="design-gallery-img" src="design_system.png" alt="Design system screenshot 1 of 3">
+              </div>
+              <button class="gallery-btn next" aria-label="Next screenshot" type="button">›</button>
+            </div>
           </div>
           <div class="project-details card">
             <h3>Design system & site overhaul</h3>
@@ -225,6 +237,7 @@
           </div>
         </article>
 
+        <!-- Online shop -->
         <article class="project-row">
           <div class="project-media">
             <div class="screenshot"><img src="shop.png" alt="Online shop screenshot"></div>
@@ -270,6 +283,7 @@
   </div>
 
   <script>
+    // --- Modal (click any .screenshot img to expand) ---
     const modal = document.getElementById('imgModal');
     const modalImg = document.getElementById('modalImg');
     const closeBtn = document.querySelector('.close');
@@ -285,17 +299,14 @@
     modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
     document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-    (function() {
-      const frames = [
-        'creator_dashboard_0.png',
-        'creator_dashboard_1.png',
-        'creator_dashboard_2.png'
-      ];
+    // Helper to set up a gallery by id and frames
+    function setupGallery({ galleryId, imgId, frames, altPrefix }) {
+      // Preload to reduce flicker
       frames.forEach(src => { const im = new Image(); im.src = src; });
 
       let idx = 0;
-      const imgEl = document.getElementById('creator-gallery-img');
-      const gallery = document.getElementById('creator-gallery');
+      const imgEl = document.getElementById(imgId);
+      const gallery = document.getElementById(galleryId);
       if (!imgEl || !gallery) return;
 
       const prevBtn = gallery.querySelector('.gallery-btn.prev');
@@ -304,20 +315,38 @@
       function setImage(i) {
         idx = (i + frames.length) % frames.length;
         imgEl.src = frames[idx];
-        imgEl.alt = `Creator analytics dashboard screenshot ${idx + 1} of ${frames.length}`;
+        imgEl.alt = `${altPrefix} ${idx + 1} of ${frames.length}`;
       }
 
       function next() { setImage(idx + 1); }
       function prev() { setImage(idx - 1); }
 
+      // Prevent arrow click from triggering modal
       prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
       nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
 
+      // Keyboard support while focused
       gallery.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') { prev(); }
-        if (e.key === 'ArrowRight') { next(); }
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
       });
-    })();
+    }
+
+    // --- Creator gallery ---
+    setupGallery({
+      galleryId: 'creator-gallery',
+      imgId: 'creator-gallery-img',
+      frames: ['creator_dashboard_0.png','creator_dashboard_1.png','creator_dashboard_2.png'],
+      altPrefix: 'Creator analytics dashboard screenshot'
+    });
+
+    // --- Design system gallery (first same name, then _1 and _2) ---
+    setupGallery({
+      galleryId: 'design-gallery',
+      imgId: 'design-gallery-img',
+      frames: ['design_system.png','design_system_1.png','design_system_2.png'],
+      altPrefix: 'Design system screenshot'
+    });
   </script>
 </body>
 </html>
